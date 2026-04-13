@@ -16,6 +16,24 @@ class Message {
 		try {
 			const { rows } = await pool.query(query);
 			return rows;
-		} catch (error) {}
+		} catch (error) {
+			console.error("[getAllMessages] Query error: ", error);
+		}
+	}
+
+	static async addMessage(title, content, userId) {
+		const query = `
+            INSERT INTO messages (title, content, user_id)
+            VALUES ($1, $2, $3);
+        `;
+		const values = [title, content, userId];
+
+		try {
+			const { rows } = await pool.query(query, values);
+			return rows;
+		} catch (error) {
+			console.error("[addMessage] Query error: ", error);
+			throw error;
+		}
 	}
 }
