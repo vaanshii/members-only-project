@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const path = require("node:path");
 const passport = require("passport");
 const sessionMiddleware = require("./config/session");
 
@@ -15,6 +16,12 @@ const { indexRoutes } = require("./routes/indexRoutes");
 // core middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.set("views", path.join(__dirname, "views"));
+app.set("views", "ejs");
+
+const assetsPath = path.join(__dirname, "public");
+app.use(express.static(assetsPath));
 
 // session and passport middlewares
 app.use(sessionMiddleware);
