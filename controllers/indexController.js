@@ -1,5 +1,10 @@
 function getLetterLists(req, res) {
-	res.send("INDEX FROM CONTROLLER");
+	res.render("index", {
+		title: "Home",
+		formData: null,
+		errors: [],
+		openRegister: false,
+	});
 }
 
 module.exports = { getLetterLists };
