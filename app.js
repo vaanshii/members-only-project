@@ -12,6 +12,7 @@ const PORT = process.env.PORT;
 
 // routes imports
 const { indexRoutes } = require("./routes/indexRoutes");
+const { signUpRoute } = require("./routes/signUpRoutes");
 
 // core middlewares
 app.use(express.json());
@@ -29,6 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/", indexRoutes);
+app.use("/sign-up", signUpRoute);
 
 app.listen(PORT || 3000, (error) => {
 	if (error) {
