@@ -1,0 +1,112 @@
+<div x-data="{ openRegister: false, openLogin: false, }" class="min-h-screen bg-zinc-950">
+
+  <nav class="sticky top-0 z-40 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-black italic tracking-tighter text-zinc-100 uppercase">
+        Moto<span class="text-orange-500">Club</span>
+      </h1>
+
+      <div class="flex items-center gap-6">
+        <button @click="openLogin = true" class="cursor-pointer res-text-body-text font-medium text-zinc-400 hover:text-zinc-100 transition-colors">
+          Log in
+        </button>
+
+        <button @click="openRegister = true" class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-white px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wide transition-all active:scale-95 shadow-lg shadow-orange-900/20">
+          Sign Up
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <template x-teleport="body">
+    <div x-show="openRegister" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" style="display: none;">
+
+      <div @click.away="openRegister = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="w-full max-w-md bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden">
+        <div class="h-1.5 w-full bg-orange-600"></div>
+
+        <div class="p-8 overflow-y-auto">
+          <div class="flex justify-between items-start mb-8">
+            <div>
+              <h2 class="text-3xl font-black uppercase italic tracking-tighter text-zinc-100">
+                Join the <span class="text-orange-500">Crew</span>
+              </h2>
+              <p class="text-zinc-500 text-sm mt-1">Create your rider profile to start posting.</p>
+            </div>
+            <button @click="openRegister = false" class="text-zinc-500 hover:text-zinc-100">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <form action="/sign-up" method="post" class="space-y-5">
+            <div>
+              <label for="username" class="block text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2">Rider Name (Username)</label>
+              <input id="username" name="username" type="text" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none" />
+            </div>
+            <div>
+              <label for="firstName" class="block text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2">First Name</label>
+              <input id="firstName" name="firstName" type="text" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none" />
+            </div>
+            <div>
+              <label for="lastName" class="block text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2">Last Name</label>
+              <input id="lastName" name="lastName" type="text" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none" />
+            </div>
+            <div>
+              <label for="password" class="block text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2">Password</label>
+              <input id="password" name="password" type="password" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none" />
+            </div>
+            <button type="submit" class="w-full cursor-pointer bg-orange-600 hover:bg-orange-500 text-white font-black uppercase py-4 rounded-lg tracking-widest transition-all">
+              Start Your Engine
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template x-teleport="body">
+    <div x-show="openLogin" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" style="display: none;">
+      <div @click.away="openLogin = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="w-full max-w-md bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden">
+        <div class="h-1.5 w-full bg-sky-500"></div>
+        <div class="p-8">
+          <div class="flex justify-between items-start mb-8">
+            <div>
+              <h2 class="text-3xl font-black uppercase italic tracking-tighter text-zinc-100">
+                Welcome <span class="text-sky-500">Back</span>
+              </h2>
+              <p class="text-zinc-500 text-sm mt-1">Ready for the next ride?</p>
+            </div>
+            <button @click="openLogin = false" class=" text-zinc-500 hover:text-zinc-100 cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <form action="/login" method="get" class="space-y-5">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2">Rider Name</label>
+              <input type="text" placeholder="Username" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg py-3 px-4 text-zinc-200 placeholder:text-zinc-600 focus:ring-2 focus:ring-sky-500/50 outline-none transition-all" />
+            </div>
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <label class="text-xs font-bold uppercase tracking-widest text-zinc-400">Password</label>
+                <a href="#" class="text-[10px] text-zinc-500 hover:text-sky-500 uppercase tracking-tighter">Forgot?</a>
+              </div>
+              <input type="password" placeholder="••••••••" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg py-3 px-4 text-zinc-200 placeholder:text-zinc-600 focus:ring-2 focus:ring-sky-500/50 outline-none transition-all" />
+            </div>
+            <button type="submit" class="w-full cursor-pointer bg-sky-600 hover:bg-sky-500 text-white font-black uppercase py-4 rounded-lg tracking-widest transition-all shadow-lg shadow-sky-900/20">
+              Ignition
+            </button>
+          </form>
+
+          <p class="text-center text-zinc-500 text-sm mt-8">
+            New here?
+            <button @click="openLogin = false; openRegister = true" class="cursor-pointer text-sky-500 hover:text-sky-400 font-bold underline underline-offset-4">Create Account</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>
