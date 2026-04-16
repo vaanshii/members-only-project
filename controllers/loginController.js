@@ -3,8 +3,8 @@ const User = require("../models/user");
 const passport = require("passport");
 
 exports.authenticateUser = passport.authenticate("local", {
-	successRedirect: "/success", // redirect to empty route for now
-	failureRedirect: "/failed",
+	successRedirect: "/",
+	failureRedirect: "/",
 });
 
 exports.logoutUser = (req, res, next) => {
