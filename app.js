@@ -34,6 +34,14 @@ app.use("/", indexRoutes);
 app.use("/sign-up", signUpRoute);
 app.use("/", loginRoutes);
 
+app.use("/{*splat}", (req, res) => {
+	if (req.isAuthenticated()) {
+		res.status(404).render("./partials/404", { title: "404" });
+	} else {
+		res.redirect("/");
+	}
+});
+
 app.listen(PORT || 3000, (error) => {
 	if (error) {
 		throw error;
