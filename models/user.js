@@ -10,7 +10,7 @@ class User {
 		try {
 			const { rows } = await pool.query(query, values);
 
-			return rows;
+			return rows[0];
 		} catch (error) {
 			console.error("[getByUsername] Query Error: ", error);
 			throw error;
@@ -26,7 +26,7 @@ class User {
 		try {
 			const { rows } = await pool.query(query, values);
 
-			return rows;
+			return rows[0];
 		} catch (error) {
 			console.error("[getById] Query Error: ", error);
 			throw error;
@@ -53,7 +53,7 @@ class User {
 
 		try {
 			const { rows } = await pool.query(query, values);
-			return rows;
+			return rows[0];
 		} catch (error) {
 			console.error(`[createUser] Query Error: `, error);
 			throw error;
