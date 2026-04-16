@@ -1,8 +1,9 @@
 const { Router } = require("express");
-const { getLetterLists } = require("../controllers/indexController");
+const { getAllMessages } = require("../controllers/indexController");
+const { isAuth } = require("../middleware/authMiddleware");
 
 const indexRoutes = Router();
 
-indexRoutes.get("/", getLetterLists);
+indexRoutes.get("/", isAuth, getAllMessages);
 
 module.exports = { indexRoutes };

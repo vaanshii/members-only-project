@@ -1,4 +1,4 @@
-function getLetterLists(req, res) {
+function getAllMessages(req, res) {
 	res.render("index", {
 		title: "Home",
 		formData: null,
@@ -7,4 +7,4 @@ function getLetterLists(req, res) {
 	});
 }
 
-module.exports = { getLetterLists };
+module.exports = { getAllMessages };
