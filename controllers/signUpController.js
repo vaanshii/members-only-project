@@ -1,9 +1,11 @@
 const { matchedData, validationResult } = require("express-validator");
 const { validateSignUp } = require("../validators/signUpValidator");
+const User = require("../models/user");
+const { generatePassword } = require("../utils/passwordUtils");
 
 exports.signUpUserPOST = [
 	validateSignUp,
-	(req, res) => {
+	async (req, res) => {
 		const errors = validationResult(req);
 		console.log(errors);
 
@@ -14,6 +16,16 @@ exports.signUpUserPOST = [
 				formData: req.body,
 				openRegister: true,
 			});
+		}
+
+		const userData = matchedData(req);
+		const hashedPassword = await generatePassword(userData.password);
+
+		try {
+			await User.createUser(userData, hashedPassword);
+		} catch (error) {
+			console.error("[signUpUserPOST] Error: ", error);
+			throw error;
 		}
 	},
 ];
