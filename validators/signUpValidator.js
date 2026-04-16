@@ -50,7 +50,7 @@ const validateSignUp = [
 		.withMessage("At least one special character"),
 	body("confirmPassword")
 		.trim()
-		.isEmpty()
+		.notEmpty()
 		.withMessage("Please re-enter your password")
 		.custom((value, { req }) => {
 			if (value !== req.body.password) {
