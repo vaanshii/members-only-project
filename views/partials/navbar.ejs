@@ -6,6 +6,7 @@
         Moto<span class="text-orange-500">Club</span>
       </h1>
 
+      <% if (!locals.isAuthenticated) { %>
       <div class="flex items-center gap-6">
         <button @click="openLogin = true" class="cursor-pointer res-text-body-text font-medium text-zinc-400 hover:text-zinc-100 transition-colors">
           Log in
@@ -15,10 +16,19 @@
           Sign Up
         </button>
       </div>
+      <% } else { %>
+      <!--  Logout button for now -->
+      <button @click="window.location.href = '/logout'" class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-white px-3 py-2 rounded-lg text-sm font-bold uppercase tracking-wide transition-all active:scale-95 shadow-lg shadow-orange-900/20">
+        Log out
+      </button>
+      <% } %>
     </div>
   </nav>
 
+  <% if (!locals.isAuthenticated) { %>
   <%- include('../components/registerModal', {errors: errors, formData: formData}) %>
   <%- include('../components/loginModal') %>
+  <% } %>
+
 
 </div>
