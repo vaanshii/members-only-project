@@ -7,7 +7,7 @@ const sessionConfig = {
 	store: new pgSession({ pool, tableName: process.env.SESSION_TABLE_NAME }),
 	secret: process.env.COOKIE_SECRET,
 	resave: false,
-	saveUninitialized: true,
+	saveUninitialized: false,
 	cookie: { maxAge: 1000 * 60 * 60 * 24 },
 };
 
