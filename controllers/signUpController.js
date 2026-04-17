@@ -5,7 +5,7 @@ const { generatePassword } = require("../utils/passwordUtils");
 
 exports.signUpUserPOST = [
 	validateSignUp,
-	async (req, res) => {
+	async (req, res, next) => {
 		const errors = validationResult(req);
 		console.log(errors);
 
@@ -22,10 +22,19 @@ exports.signUpUserPOST = [
 		const hashedPassword = await generatePassword(userData.password);
 
 		try {
-			await User.createUser(userData, hashedPassword);
+			const user = await User.createUser(userData, hashedPassword);
+
+			req.login(user, (error) => {
+				if (error) {
+					console.error("[Login Error]: ", error);
+					return next(error);
+				}
+
+				return res.redirect("/");
+			});
 		} catch (error) {
 			console.error("[signUpUserPOST] Error: ", error);
-			throw error;
+			next(error);
 		}
 	},
 ];
