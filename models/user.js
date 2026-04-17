@@ -39,7 +39,8 @@ class User {
 		const query = `
             INSERT INTO users 
             (username, first_name, last_name, password, is_member, is_admin)
-            VALUES ($1, $2, $3, $4, $5, $6);
+            VALUES ($1, $2, $3, $4, $5, $6)
+			RETURNING *;
         `;
 
 		const values = [
