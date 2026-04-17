@@ -12,6 +12,15 @@ exports.logoutUser = (req, res, next) => {
 		if (error) {
 			return next(error);
 		}
-		res.redirect("/");
+
+		req.session.destroy((err) => {
+			if (error) {
+				return next(error);
+			}
+
+			res.clearCookie("connect.sid", { path: "/" });
+
+			return res.redirect("/");
+		});
 	});
 };
