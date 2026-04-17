@@ -1,4 +1,5 @@
 const { body } = require("express-validator");
+const User = require("../models/user");
 
 const emptyValueMsg = "cannot be empty.";
 const isAlphaMsg = "must only contain letters.";
@@ -10,7 +11,16 @@ const validateSignUp = [
 		.withMessage(`Rider name ${emptyValueMsg}`)
 		.bail()
 		.isLength({ min: 6, max: 40 })
-		.withMessage(`Rider name must be between 6 and 40 characters.`),
+		.withMessage(`Rider name must be between 6 and 40 characters.`)
+		.custom(async (username, { req }) => {
+			const user = await User.getByUsername(username);
+
+			if (user) {
+				throw new Error("Username already taken.");
+			}
+
+			return true;
+		}),
 	body("firstName")
 		.trim()
 		.notEmpty()
