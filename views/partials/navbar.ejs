@@ -1,35 +1,25 @@
-<div x-data="{ openRegister:<%= locals.openRegister === true ? 'true' : 'false' %>, openLogin: <%= locals.openLogin=== true ? 'true' : 'false' %>, openProfile: false }" class="min-h-screen bg-zinc-950">
+<nav class="sticky top-0 z-40 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 px-6 py-4">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <h1 class="text-2xl font-black italic tracking-tighter text-zinc-100 uppercase">
+      Moto<span class="text-orange-500">Club</span>
+    </h1>
 
-  <nav class="sticky top-0 z-40 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 px-6 py-4">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-black italic tracking-tighter text-zinc-100 uppercase">
-        Moto<span class="text-orange-500">Club</span>
-      </h1>
+    <% if (!locals.isAuthenticated) { %>
+    <div class="flex items-center gap-6">
+      <button @click="openLogin = true" class="cursor-pointer res-text-body-text font-medium text-zinc-400 hover:text-zinc-100 transition-colors">
+        Log in
+      </button>
 
-      <% if (!locals.isAuthenticated) { %>
-      <div class="flex items-center gap-6">
-        <button @click="openLogin = true" class="cursor-pointer res-text-body-text font-medium text-zinc-400 hover:text-zinc-100 transition-colors">
-          Log in
-        </button>
-
-        <button @click="openRegister = true" class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-white px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wide transition-all active:scale-95 shadow-lg shadow-orange-900/20">
-          Sign Up
-        </button>
-      </div>
-      <% } else { %>
-      <div class="flex gap-1.5 items-center text-1xl font-bold">
-        <h2 class="text-zinc-100"><%= locals.user.username %></h2>
-        <%- include('../components/accountDropdownModal') %>
-      </div>
-
-      <% } %>
+      <button @click="openRegister = true" class="cursor-pointer bg-orange-600 hover:bg-orange-500 text-white px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wide transition-all active:scale-95 shadow-lg shadow-orange-900/20">
+        Sign Up
+      </button>
     </div>
-  </nav>
+    <% } else { %>
+    <div class="flex gap-1.5 items-center text-1xl font-bold">
+      <h2 class="text-zinc-100"><%= locals.user.username %></h2>
+      <%- include('../components/accountDropdownModal') %>
+    </div>
 
-  <% if (!locals.isAuthenticated) { %>
-  <%- include('../components/registerModal', {errors: errors, formData: formData}) %>
-  <%- include('../components/loginModal') %>
-  <% } %>
-
-
-</div>
+    <% } %>
+  </div>
+</nav>
