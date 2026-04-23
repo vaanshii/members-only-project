@@ -4,6 +4,7 @@ const express = require("express");
 const path = require("node:path");
 const passport = require("passport");
 const sessionMiddleware = require("./config/session");
+const flash = require("connect-flash");
 
 require("./config/passport");
 
@@ -14,10 +15,12 @@ const PORT = process.env.PORT;
 const { indexRoutes } = require("./routes/indexRoutes");
 const { signUpRoute } = require("./routes/signUpRoutes");
 const { loginRoutes } = require("./routes/loginRoutes");
+const { postMessageRoute } = require("./routes/postMessageRoute");
 
 // core middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(flash());
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -30,9 +33,11 @@ app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
+// routes
 app.use("/", indexRoutes);
 app.use("/sign-up", signUpRoute);
 app.use("/", loginRoutes);
+app.use("/post-message", postMessageRoute);
 
 app.use("/{*splat}", (req, res) => {
 	if (req.isAuthenticated()) {
