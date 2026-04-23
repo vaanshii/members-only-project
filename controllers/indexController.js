@@ -7,13 +7,22 @@ async function getAllMessagesGET(req, res, next) {
 
 	try {
 		const rawPostMessages = await Message.getAllMessages();
+		let postMessages = [];
 
-		const postMessages = rawPostMessages.map((post) => ({
-			...post,
-			created_at: formatDistanceToNow(new Date(post.created_at), {
-				addSuffix: true,
-			}),
-		}));
+		if (req.isAuthenticated()) {
+			postMessages = rawPostMessages.map((post) => ({
+				...post,
+				created_at: formatDistanceToNow(new Date(post.created_at), {
+					addSuffix: true,
+				}),
+			}));
+		} else {
+			postMessages = rawPostMessages.map((post) => ({
+				...post,
+				username: null,
+				created_at: null,
+			}));
+		}
 
 		res.status(200).render("index", {
 			title: "MotoClub",
