@@ -14,12 +14,20 @@
     <% if (locals.isAuthenticated) { %>
     <%- include('./partials/createPostBtn') %>
     <%- include('./components/createPostModal') %>
+
+    <div class="max-w-2xl mx-auto px-4 mb-6 flex flex-col gap-6">
+      <% postMessages.forEach(postData => { %>
+      <%- include('./components/postCard', { postData }) %>
+      <% }) %>
+    </div>
     <% } %>
 
     <% if (!locals.isAuthenticated) { %>
     <%- include('./components/registerModal', {errors: errors, formData: formData}) %>
     <%- include('./components/loginModal') %>
     <% } %>
+
+
   </div>
 </body>
 
