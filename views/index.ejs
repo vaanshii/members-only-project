@@ -3,9 +3,24 @@
 <%- include('./partials/head') %>
 
 <body class="bg-zinc-950 text-zinc-300">
-  <%- include('./partials/navbar') %>
+  <div x-data="{ openRegister:<%= locals.openRegister === true ? 'true' : 'false' %>, 
+                openLogin: <%= locals.openLogin=== true ? 'true' : 'false' %>, 
+                openProfile: false,
+                openCreatePost: <%= openCreatePost === true ? 'true' : 'false' %>,
+                }" class="min-h-screen bg-zinc-950">
 
+    <%- include('./partials/navbar') %>
 
+    <% if (locals.isAuthenticated) { %>
+    <%- include('./partials/createPostBtn') %>
+    <%- include('./components/createPostModal') %>
+    <% } %>
+
+    <% if (!locals.isAuthenticated) { %>
+    <%- include('./components/registerModal', {errors: errors, formData: formData}) %>
+    <%- include('./components/loginModal') %>
+    <% } %>
+  </div>
 </body>
 
 </html>
