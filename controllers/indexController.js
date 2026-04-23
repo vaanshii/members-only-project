@@ -16,7 +16,7 @@ async function getAllMessagesGET(req, res, next) {
 		}));
 
 		res.status(200).render("index", {
-			title: "Home",
+			title: "MotoClub",
 			formData: rawFormData ? JSON.parse(rawFormData) : null,
 			errors: rawErrors ? JSON.parse(rawErrors) : [],
 			openCreatePost: !!rawErrors,

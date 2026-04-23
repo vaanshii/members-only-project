@@ -11,7 +11,7 @@ exports.signUpUserPOST = [
 
 		if (!errors.isEmpty()) {
 			return res.status(400).render("index", {
-				title: "Home",
+				title: "MotoClub",
 				errors: errors.array(),
 				formData: req.body,
 				openRegister: true,

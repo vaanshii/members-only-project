@@ -10,7 +10,7 @@ exports.authenticateUser = (req, res, next) => {
 
 		if (!user) {
 			return res.status(401).render("index", {
-				title: "Home",
+				title: "MotoClub",
 				errors: [{ msg: "Invalid username or password" }],
 				formData: req.body,
 				openLogin: true,
