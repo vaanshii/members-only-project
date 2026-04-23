@@ -21,12 +21,14 @@ class Message {
 		}
 	}
 
-	static async addMessage(title, content, userId) {
+	static async addMessage(messageData, userId) {
+		const { title, message } = messageData;
+
 		const query = `
             INSERT INTO messages (title, content, user_id)
             VALUES ($1, $2, $3);
         `;
-		const values = [title, content, userId];
+		const values = [title, message, userId];
 
 		try {
 			const { rows } = await pool.query(query, values);
@@ -37,3 +39,5 @@ class Message {
 		}
 	}
 }
+
+module.exports = { Message };
