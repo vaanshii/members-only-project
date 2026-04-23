@@ -14,11 +14,6 @@
     <% if (locals.isAuthenticated) { %>
     <%- include('./partials/createPostBtn') %>
     <%- include('./components/createPostModal') %>
-
-    <% postMessages.forEach(postData => { %>
-    <%- include('./components/postCard', { postData }) %>
-    <% }) %>
-
     <% } %>
 
     <% if (!locals.isAuthenticated) { %>
@@ -26,6 +21,9 @@
     <%- include('./components/loginModal') %>
     <% } %>
 
+    <% postMessages.forEach(postData => { %>
+    <%- include('./components/postCard', { postData }) %>
+    <% }) %>
 
   </div>
 </body>
