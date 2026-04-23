@@ -1,10 +1,6 @@
 <div class="max-w-2xl mx-auto mt-6 px-4">
   <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-4 mb-6 flex items-center gap-4">
-    <div class="h-8 w-8 bg-zinc-800 rounded-full flex items-center justify-center border border-zinc-700 text-zinc-400 group-hover:text-orange-500">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-      </svg>
-    </div>
+    <%- include('./generatedAvatarProfile', {username: locals.user.username}) %>
     <button @click="openCreatePost = true" class="flex-1 bg-zinc-950 border border-zinc-800 text-left px-4 py-2.5 rounded-full text-zinc-500 hover:border-zinc-700 transition-colors text-sm">
       Share your ride, <%= locals.user.username %>...
     </button>

@@ -1,16 +1,14 @@
-<div x-data="{ expanded: false }" class="max-w-2xl mx-auto px-4 mb-6 flex flex-col gap-6">
+<div x-data="{ expanded: false }" class="max-w-2xl mx-auto px-4 mb-6 mt-10">
 
   <article class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-sm hover:border-zinc-700 transition-colors">
 
     <div class="p-4 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="h-10 w-10 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center overflow-hidden">
-          <img src="https://api.dicebear.com/7.x/bottts/svg?seed=<%= postData?.username || 'Anon'%>" alt="avatar" class="w-full h-full object-cover">
-        </div>
+        <%- include('../partials/generatedAvatarProfile', {username: postData.username}) %>
 
         <div>
           <h4 class="text-sm font-bold text-zinc-100 hover:text-orange-500 cursor-pointer transition-colors leading-none">
-            <%= postData?.username || 'Anonymouse' %>
+            <%= postData?.username || 'Anonymous' %>
           </h4>
           <span class="text-[10px] text-zinc-500 uppercase tracking-widest font-medium">
             Full-Stack Rider
@@ -32,7 +30,7 @@
         <%= postData.content %>
       </p>
 
-      <% if (postData.content.length > 200) { %>
+      <% if (postData.content.length > 200 && locals.isAuthenticated) { %>
       <button @click="expanded = !expanded" class="mt-3 text-xs font-bold text-orange-500 hover:text-orange-400 uppercase tracking-wider flex items-center gap-1">
         <span x-text="expanded ? 'Collapse' : 'Expand'"></span>
         <svg xmlns="http://www.w3.org/2000/svg" :class="expanded ? 'rotate-180' : ''" class="h-3 w-3 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
