@@ -15,6 +15,8 @@ exports.signUpUserPOST = [
 				errors: errors.array(),
 				formData: req.body,
 				openRegister: true,
+				openCreatePost: false,
+				postMessages: [],
 			});
 		}
 

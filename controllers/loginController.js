@@ -14,6 +14,8 @@ exports.authenticateUser = (req, res, next) => {
 				errors: [{ msg: "Invalid username or password" }],
 				formData: req.body,
 				openLogin: true,
+				openCreatePost: false,
+				postMessages: [],
 			});
 		}
 
