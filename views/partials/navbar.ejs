@@ -1,8 +1,8 @@
 <nav class="sticky top-0 z-40 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 px-6 py-4">
   <div class="max-w-7xl mx-auto flex justify-between items-center">
-    <h1 class="text-2xl font-black italic tracking-tighter text-zinc-100 uppercase">
+    <a href="/" class="text-2xl font-black italic tracking-tighter text-zinc-100 uppercase">
       Moto<span class="text-orange-500">Club</span>
-    </h1>
+    </a>
 
     <% if (!locals.isAuthenticated) { %>
     <div class="flex items-center gap-6">
@@ -16,7 +16,7 @@
     </div>
     <% } else { %>
     <div class="flex gap-1.5 items-center text-1xl font-bold">
-      <h2 class="text-zinc-100"><%= locals.user.username %></h2>
+      <h2 class="text-zinc-100 hidden sm:block md:block"><%= locals.user.username %></h2>
       <%- include('../components/accountDropdownModal') %>
     </div>
 
