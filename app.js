@@ -16,6 +16,7 @@ const { indexRoutes } = require("./routes/indexRoutes");
 const { signUpRoute } = require("./routes/signUpRoutes");
 const { loginRoutes } = require("./routes/loginRoutes");
 const { postMessageRoute } = require("./routes/postMessageRoute");
+const { profileRouter } = require("./routes/profileRoutes");
 
 // core middlewares
 app.use(express.json());
@@ -38,6 +39,7 @@ app.use("/", indexRoutes);
 app.use("/sign-up", signUpRoute);
 app.use("/", loginRoutes);
 app.use("/post-message", postMessageRoute);
+app.use("/profile", profileRouter);
 
 app.use("/{*splat}", (req, res) => {
 	if (req.isAuthenticated()) {
