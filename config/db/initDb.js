@@ -29,6 +29,8 @@ async function initializeTables() {
             username VARCHAR(255) UNIQUE NOT NULL,
             first_name VARCHAR(255),
             last_name VARCHAR(255),
+            motorcycle VARCHAR(255),
+            bio TEXT,
             password TEXT NOT NULL,
             is_member BOOLEAN DEFAULT FALSE,
             is_admin BOOLEAN DEFAULT FALSE,
