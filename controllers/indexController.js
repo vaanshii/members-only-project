@@ -1,4 +1,4 @@
-const { Message } = require("../models/message");
+const Message = require("../models/message");
 const { formatDistanceToNow } = require("date-fns");
 
 async function getAllMessagesGET(req, res, next) {
