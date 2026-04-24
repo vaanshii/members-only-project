@@ -38,6 +38,28 @@ class Message {
 			throw error;
 		}
 	}
+
+	static async getMessagesByUsername(username) {
+		const query = `
+			SELECT 
+                messages.id, 
+                messages.title, 
+                messages.content, 
+                messages.created_at, 
+                users.username
+            FROM messages
+            JOIN users ON messages.user_id = users.id
+			WHERE users.username = $1
+            ORDER BY messages.created_at DESC;`;
+
+		try {
+			const { rows } = await pool.query(query, [username]);
+			return rows;
+		} catch (error) {
+			console.error("[getMessagesByUsername] Query error: ", error);
+			throw error;
+		}
+	}
 }
 
-module.exports = { Message };
+module.exports = Message;
