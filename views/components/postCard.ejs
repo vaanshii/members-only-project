@@ -10,8 +10,8 @@
           <a href="/profile/<%= postData.username %>" class="text-sm font-bold text-zinc-100 hover:text-orange-500 cursor-pointer transition-colors leading-none">
             <%= postData?.username || 'Anonymous' %>
           </a>
-          <p class="text-[10px] text-zinc-500 uppercase tracking-widest font-medium">
-            Full-Stack Rider
+          <p class="text-[10px] text-orange-500 uppercase tracking-widest font-medium">
+            <%= postData?.motorcycle || 'currently walking' %>
           </p>
         </div>
       </div>
