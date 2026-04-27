@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head', { title: "Edit Rider Info" }) %>
+
+<body>
+  <div class="min-h-screen bg-zinc-950 text-zinc-100 pb-20">
+    <%- include('./partials/navbar') %>
+    <div class="max-w-2xl mx-auto px-4 pt-10">
+
+      <div class="mb-10">
+        <h1 class="text-3xl font-black italic tracking-tighter uppercase">
+          Rider <span class="text-orange-500">Settings</span>
+        </h1>
+        <p class="text-zinc-500 text-sm mt-1">Manage your rider identity and security.</p>
+      </div>
+
+      <section class="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden mb-8">
+        <div class="px-6 py-4 border-b border-zinc-800 bg-zinc-900/50">
+          <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">Rider Profile</h2>
+        </div>
+
+        <form action="/profile/edit" method="POST" class="p-6 space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="firstName" class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 ml-1">First Name</label>
+              <input id="firstName" name="firstName" type="text" value="<%= formData?.firstName|| '' %>" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none transition-all">
+              <% errors.forEach(error => { %>
+              <% if (error.path === 'firstName') { %>
+              <p class="text-red-500"><%= error.msg %></p>
+              <% } %>
+              <% }) %>
+            </div>
+            <div>
+              <label for="lastName" class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 ml-1">Last Name</label>
+              <input id="lastName" name="lastName" type="text" value="<%= formData?.lastName || ''%>" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none transition-all">
+              <% errors.forEach(error => { %>
+              <% if (error.path === 'lastName') { %>
+              <p class="text-red-500"><%= error.msg %></p>
+              <% } %>
+              <% }) %>
+            </div>
+          </div>
+
+          <div>
+            <label for="motorcycle" class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 ml-1">Current Ride (Motorcycle)</label>
+            <input id="motorcycle" name="motorcycle" type="text" value="<%= formData?.motorcycle || '' %>" placeholder="e.g. 2023 Triumph Street Triple" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none transition-all">
+            <% errors.forEach(error => { %>
+            <% if (error.path === 'motorcycle') { %>
+            <p class="text-red-500"><%= error.msg %></p>
+            <% } %>
+            <% }) %>
+          </div>
+
+          <div>
+            <label for="bio" class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 ml-1">Bio</label>
+            <textarea id="bio" name="bio" rows="4" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none transition-all resize-none"> <%= formData?.bio || 'Chasing sunsets on two wheels...' %></textarea>
+            <% errors.forEach(error => { %>
+            <% if (error.path === 'bio') { %>
+            <p class="text-red-500"><%= error.msg %></p>
+            <% } %>
+            <% }) %>
+          </div>
+
+          <button type="submit" class="w-full sm:w-auto bg-orange-600 hover:bg-orange-500 text-white font-black uppercase px-10 py-3 rounded-full text-xs tracking-widest transition-all shadow-lg shadow-orange-900/20">
+            Save Changes
+          </button>
+        </form>
+      </section>
+
+      <section class="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden">
+        <div class="px-6 py-4 border-b border-zinc-800 bg-zinc-900/50">
+          <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">Security</h2>
+        </div>
+
+        <form action="/profile/password" method="POST" class="p-6 space-y-6">
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 ml-1">Current Password</label>
+            <input type="password" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none transition-all">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 ml-1">New Password</label>
+              <input type="password" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none transition-all">
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 ml-1">Confirm New Password</label>
+              <input type="password" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none transition-all">
+            </div>
+          </div>
+
+          <button type="submit" class="w-full sm:w-auto border border-zinc-700 hover:border-zinc-500 text-zinc-300 font-black uppercase px-10 py-3 rounded-full text-xs tracking-widest transition-all">
+            Update Password
+          </button>
+        </form>
+      </section>
+
+    </div>
+  </div>
+</body>
+
+</html>
