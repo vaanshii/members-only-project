@@ -76,6 +76,31 @@ class User {
 			throw error;
 		}
 	}
+
+	static async updateInfoByUsername(userData, username) {
+		const query = `
+			UPDATE users
+			SET first_name = $1, last_name = $2, motorcycle = $3,
+				bio = $4
+			WHERE username = $5
+			RETURNING *;
+		`;
+		const values = [
+			userData.firstName,
+			userData.lastName,
+			userData.motorcycle,
+			userData.bio,
+			username,
+		];
+
+		try {
+			const { rows } = await pool.query(query, values);
+			return rows[0];
+		} catch (error) {
+			console.error("[updateInfoByUsername] Query Error: ", error);
+			throw error;
+		}
+	}
 }
 
 module.exports = User;
