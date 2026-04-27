@@ -1,6 +1,6 @@
 const { matchedData, validationResult } = require("express-validator");
 const { validatePost } = require("../validators/postValidator");
-const { Message } = require("../models/message");
+const Message = require("../models/message");
 
 exports.postMessagePOST = [
 	validatePost,
