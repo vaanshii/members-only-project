@@ -8,7 +8,8 @@ class Message {
                 messages.title, 
                 messages.content, 
                 messages.created_at, 
-                users.username
+                users.username,
+				users.motorcycle
             FROM messages
             JOIN users ON messages.user_id = users.id
             ORDER BY messages.created_at DESC;
