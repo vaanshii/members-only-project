@@ -26,3 +26,22 @@ exports.postMessagePOST = [
 		}
 	},
 ];
+
+exports.deleteMessageDELETE = async (req, res, next) => {
+	const postId = req.params.id;
+	const currentUserId = req.user.id;
+	const redirectUrl = `/profile/${req.user.username}`;
+
+	try {
+		const message = await Message.deleteMessage(postId, currentUserId);
+
+		if (message.rowCount === 0) {
+			return res.status(403).redirect(redirectUrl);
+		}
+
+		return res.redirect(redirectUrl);
+	} catch (error) {
+		console.error("[deleteMessageDELETE] Error: ", error);
+		next(error);
+	}
+};
