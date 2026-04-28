@@ -12,6 +12,6 @@ profileRouter.get("/:username", isAuth, getUserProfileGET);
 
 profileRouter.get("/:username/edit", isAuth, editProfileGET);
 
-profileRouter.post("/edit", isAuth, updateProfilePOST);
+profileRouter.put("/edit", isAuth, updateProfilePOST);
 
 module.exports = { profileRouter };
