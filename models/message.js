@@ -61,6 +61,20 @@ class Message {
 			throw error;
 		}
 	}
+
+	static async deleteMessage(postId, userId) {
+		const query = `
+			DELETE FROM messages WHERE id = $1 AND user_id = $2;
+		`;
+
+		try {
+			const result = await pool.query(query, [postId, userId]);
+			return result;
+		} catch (error) {
+			console.error("[deleteMessage] Query error: ", error);
+			throw error;
+		}
+	}
 }
 
 module.exports = Message;
