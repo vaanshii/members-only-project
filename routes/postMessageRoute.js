@@ -1,8 +1,13 @@
 const { Router } = require("express");
-const { postMessagePOST } = require("../controllers/postMessageController");
+const {
+	postMessagePOST,
+	deleteMessageDELETE,
+} = require("../controllers/postMessageController");
 
 const postMessageRoute = Router();
 
 postMessageRoute.post("/", postMessagePOST);
+
+postMessageRoute.delete("/delete/:id", deleteMessageDELETE);
 
 module.exports = { postMessageRoute };
