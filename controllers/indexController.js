@@ -4,12 +4,13 @@ const { formatDistanceToNow } = require("date-fns");
 async function getAllMessagesGET(req, res, next) {
 	const rawErrors = req.flash("errors")[0];
 	const rawFormData = req.flash("formData")[0];
+	const showInput = req.flash("showInput").length > 0;
 
 	try {
 		const rawPostMessages = await Message.getAllMessages();
 		let postMessages = [];
 
-		if (req.isAuthenticated()) {
+		if (req.isAuthenticated() && req.user.is_member) {
 			postMessages = rawPostMessages.map((post) => ({
 				...post,
 				created_at: formatDistanceToNow(new Date(post.created_at), {
@@ -30,6 +31,7 @@ async function getAllMessagesGET(req, res, next) {
 			errors: rawErrors ? JSON.parse(rawErrors) : [],
 			openCreatePost: !!rawErrors,
 			postMessages: postMessages,
+			showInput: showInput,
 		});
 	} catch (error) {
 		console.error("[getAllMessagesGET] Error: ", error);
