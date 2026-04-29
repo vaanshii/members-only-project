@@ -115,6 +115,18 @@ class User {
 			throw error;
 		}
 	}
+
+	static async updatePassword(userId, newPassword) {
+		try {
+			const result = await pool.query(
+				"UPDATE users SET password = $2 WHERE id = $1",
+				[userId, newPassword],
+			);
+		} catch (error) {
+			console.error("[updatePassword] Query Error: ", error);
+			throw error;
+		}
+	}
 }
 
 module.exports = User;
