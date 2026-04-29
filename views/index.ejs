@@ -11,9 +11,11 @@
 
     <%- include('./partials/navbar') %>
 
-    <% if (locals.isAuthenticated) { %>
+    <% if (locals.isAuthenticated && locals.user.is_member) { %>
     <%- include('./partials/createPostBtn') %>
     <%- include('./components/createPostModal') %>
+    <% } else if (locals.isAuthenticated && !locals.user.is_member) { %>
+    <%- include('./components/memberAccess', { showInput }) %>
     <% } %>
 
     <% if (!locals.isAuthenticated) { %>
