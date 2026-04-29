@@ -72,20 +72,35 @@
           <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">Security</h2>
         </div>
 
-        <form action="/profile/password" method="POST" class="p-6 space-y-6">
+        <form action="/profile/edit/password?_method=PATCH" method="POST" class="p-6 space-y-6">
           <div>
-            <label class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 ml-1">Current Password</label>
-            <input type="password" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none transition-all">
+            <label for="currentPassword" class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 ml-1">Current Password</label>
+            <input type="password" id="currentPassword" name="currentPassword" value="<%= formData?.currentPassword || '' %>" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none transition-all">
+            <% errors.forEach(error => { %>
+            <% if (error.path === 'currentPassword') { %>
+            <p class="text-red-500"><%= error.msg %></p>
+            <% } %>
+            <% }) %>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 ml-1">New Password</label>
-              <input type="password" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none transition-all">
+              <label for="newPassword" class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 ml-1">New Password</label>
+              <input type="password" id="newPassword" name="newPassword" value="<%= formData?.newPassword || '' %>" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none transition-all">
+              <% errors.forEach(error => { %>
+              <% if (error.path === 'newPassword') { %>
+              <p class="text-red-500"><%= error.msg %></p>
+              <% } %>
+              <% }) %>
             </div>
             <div>
-              <label class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 ml-1">Confirm New Password</label>
-              <input type="password" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none transition-all">
+              <label for="confirmPassword" class="block text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 ml-1">Confirm New Password</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-3 px-4 text-zinc-200 focus:ring-2 focus:ring-orange-500/50 outline-none transition-all">
+              <% errors.forEach(error => { %>
+              <% if (error.path === 'confirmPassword') { %>
+              <p class="text-red-500"><%= error.msg %></p>
+              <% } %>
+              <% }) %>
             </div>
           </div>
 
@@ -97,6 +112,15 @@
 
     </div>
   </div>
+
+  <% if (errors && errors.length > 0) { %>
+  <script>
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
+  </script>
+  <% } %>
 </body>
 
 </html>
