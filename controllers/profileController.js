@@ -4,6 +4,10 @@ const { validationResult, matchedData } = require("express-validator");
 const User = require("../models/user");
 const Message = require("../models/message");
 const { validateEditProfile } = require("../validators/editProfileValidator");
+const {
+	validateUpdatePassword,
+} = require("../validators/updatePasswordValidator");
+const { generatePassword } = require("../utils/passwordUtils");
 
 async function getUserProfileGET(req, res, next) {
 	const username = req.params.username;
@@ -66,7 +70,7 @@ async function editProfileGET(req, res, next) {
 	return res.render("editProfile");
 }
 
-const updateProfilePOST = [
+const updateProfilePUT = [
 	validateEditProfile,
 	async (req, res, next) => {
 		const errors = validationResult(req);
@@ -90,4 +94,36 @@ const updateProfilePOST = [
 	},
 ];
 
-module.exports = { getUserProfileGET, editProfileGET, updateProfilePOST };
+const updatePasswordPATCH = [
+	validateUpdatePassword,
+	async (req, res, next) => {
+		const userId = req.user.id;
+		const errors = validationResult(req);
+
+		if (!errors.isEmpty()) {
+			return res
+				.status(401)
+				.render("editProfile", { errors: errors.array(), formData: req.body });
+		}
+
+		const passwords = matchedData(req);
+		const rawNewPassword = passwords.newPassword;
+
+		try {
+			const newHashedPassword = await generatePassword(rawNewPassword);
+
+			await User.updatePassword(userId, newHashedPassword);
+			res.redirect(`/profile/${req.user.username}`);
+		} catch (error) {
+			console.error("[updatePasswordPATCH] Error: ", error);
+			next(error);
+		}
+	},
+];
+
+module.exports = {
+	getUserProfileGET,
+	editProfileGET,
+	updateProfilePUT,
+	updatePasswordPATCH,
+};
