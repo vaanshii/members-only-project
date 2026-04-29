@@ -2,7 +2,8 @@ const { Router } = require("express");
 const {
 	getUserProfileGET,
 	editProfileGET,
-	updateProfilePOST,
+	updateProfilePUT,
+	updatePasswordPATCH,
 } = require("../controllers/profileController");
 const { isAuth } = require("../middleware/authMiddleware");
 
@@ -12,6 +13,8 @@ profileRouter.get("/:username", isAuth, getUserProfileGET);
 
 profileRouter.get("/:username/edit", isAuth, editProfileGET);
 
-profileRouter.put("/edit", isAuth, updateProfilePOST);
+profileRouter.put("/edit", isAuth, updateProfilePUT);
+
+profileRouter.patch("/edit/password", isAuth, updatePasswordPATCH);
 
 module.exports = { profileRouter };
