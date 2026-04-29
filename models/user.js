@@ -101,6 +101,20 @@ class User {
 			throw error;
 		}
 	}
+
+	static async updateMembershipStatus(userId) {
+		try {
+			const result = await pool.query(
+				"UPDATE users SET is_member = true WHERE id = $1",
+				[userId],
+			);
+
+			return result[0];
+		} catch (error) {
+			console.error("[updateMembershipStatus] Query Error: ", error);
+			throw error;
+		}
+	}
 }
 
 module.exports = User;
