@@ -40,7 +40,11 @@ async function editProfileGET(req, res, next) {
 	try {
 		const userData = await User.getByUsername(username);
 
-		if (!req.isAuthenticated() || userData === undefined) {
+		if (
+			!req.isAuthenticated() ||
+			userData === undefined ||
+			username !== req.user.username
+		) {
 			return res.status(404).render("./partials/404", { title: "404" });
 		}
 
