@@ -62,6 +62,20 @@ class Message {
 		}
 	}
 
+	static async getUserIdFromMessageId(postMessageId) {
+		try {
+			const { rows } = await pool.query(
+				"SELECT user_id FROM messages WHERE id = $1;",
+				[postMessageId],
+			);
+
+			return rows[0].user_id;
+		} catch (error) {
+			console.error("[getUserIdFromMessageId] Query error: ", error);
+			throw error;
+		}
+	}
+
 	static async deleteMessage(postId, userId) {
 		const query = `
 			DELETE FROM messages WHERE id = $1 AND user_id = $2;
