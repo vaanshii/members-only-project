@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const { matchedData, validationResult } = require("express-validator");
 const { validateSignUp } = require("../validators/signUpValidator");
 const User = require("../models/user");
@@ -20,7 +22,13 @@ exports.signUpUserPOST = [
 			});
 		}
 
-		const userData = matchedData(req);
+		let userData = matchedData(req);
+
+		if (userData.adminCode === process.env.ADMIN_SECRET_CODE) {
+			userData.isAdmin = true;
+			userData.isMember = true;
+		}
+
 		const hashedPassword = await generatePassword(userData.password);
 
 		try {
