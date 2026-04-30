@@ -68,6 +68,19 @@ const validateSignUp = [
 			}
 			return true;
 		}),
+	body("adminCode")
+		.trim()
+		.optional({ values: "falsy" })
+		.isLength({ min: 1, max: 20 })
+		.withMessage("Minimum of 1 to 20 characters only.")
+		.bail()
+		.custom((value) => {
+			if (value !== process.env.ADMIN_SECRET_CODE) {
+				throw new Error("Invalid Admin Code.");
+			}
+
+			return true;
+		}),
 ];
 
 module.exports = { validateSignUp };
