@@ -63,3 +63,7 @@ Please note that MotoClub is an active project. While the core forum and members
 - **Image Uploads**: Direct photo sharing for bike builds and gear.
 - **Upvote System**: Community-driven content ranking.
 - **Comments/Threads**: Deep-level discussions on individual posts.
+
+### LICENSE
+
+Distributed under the MIT License. See `LICENSE` for more information.
