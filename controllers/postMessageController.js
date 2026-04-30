@@ -28,12 +28,24 @@ exports.postMessagePOST = [
 ];
 
 exports.deleteMessageDELETE = async (req, res, next) => {
-	const postId = req.params.id;
-	const currentUserId = req.user.id;
+	const postMessageId = req.params.id;
+	const currentUserData = req.user;
+	const currentUserId = currentUserData.id;
 	const redirectUrl = `/profile/${req.user.username}`;
 
 	try {
-		const message = await Message.deleteMessage(postId, currentUserId);
+		if (currentUserData.is_admin) {
+			const postUserId = await Message.getUserIdFromMessageId(postMessageId);
+
+			const deleteMessage = await Message.deleteMessage(
+				postMessageId,
+				postUserId,
+			);
+
+			return res.redirect("/");
+		}
+
+		const message = await Message.deleteMessage(postMessageId, currentUserId);
 
 		if (message.rowCount === 0) {
 			return res.status(403).redirect(redirectUrl);
