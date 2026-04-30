@@ -6,8 +6,8 @@ const validatePost = [
 		.notEmpty()
 		.withMessage("Must provide a headline or title.")
 		.bail()
-		.isLength({ min: 3, max: 30 })
-		.withMessage("Minimum characters of 3, and maximum of 30."),
+		.isLength({ min: 3, max: 50 })
+		.withMessage("Minimum characters of 3, and maximum of 50."),
 	body("message")
 		.trim()
 		.notEmpty()
