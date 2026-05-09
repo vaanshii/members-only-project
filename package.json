@@ -22,12 +22,15 @@
 	},
 	"homepage": "https://github.com/vaanshii/members-only-project#readme",
 	"dependencies": {
+		"@prisma/adapter-pg": "^7.8.0",
+		"@prisma/client": "^7.8.0",
+		"@quixo3/prisma-session-store": "^3.1.19",
 		"@tailwindcss/cli": "^4.2.2",
 		"bcryptjs": "^3.0.3",
 		"connect-flash": "^0.1.1",
 		"connect-pg-simple": "^10.0.0",
 		"date-fns": "^4.1.0",
-		"dotenv": "^17.4.1",
+		"dotenv": "^17.4.2",
 		"ejs": "^5.0.1",
 		"express": "^5.2.1",
 		"express-session": "^1.19.0",
@@ -37,5 +40,8 @@
 		"passport-local": "^1.0.0",
 		"pg": "^8.20.0",
 		"tailwindcss": "^4.2.2"
+	},
+	"devDependencies": {
+		"prisma": "^7.8.0"
 	}
 }
